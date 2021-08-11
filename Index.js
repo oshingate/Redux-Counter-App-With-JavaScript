@@ -13,6 +13,7 @@ h1.innerText = counter.value;
 //----------------------------- display step ---------------------------------
 
 let steph2 = document.querySelector('.step-display');
+let maxh2 = document.querySelector('.max-display');
 changeData();
 
 //-----------------------------------selecting buttons and adding eventListener---------------
@@ -52,10 +53,23 @@ stepbuttons.forEach((each, i) => {
   });
 });
 
+//----------------------------------  changing max ----------------------------
+
+let maxButtons = document.querySelectorAll('.btn-ter');
+
+maxButtons.forEach((each, i) => {
+  each.addEventListener('click', () => {
+    store.dispatch({ type: 'maxChange', newMax: Number(each.innerText) });
+    changeData();
+    handleClassName();
+  });
+});
+
 //----------------function to change step and max diplay
 
 function changeData() {
-  return (steph2.innerText = `Step :- ${counter.step}`);
+  steph2.innerText = `Step :- ${counter.step}`;
+  maxh2.innerText = `Max :- ${counter.max}`;
 }
 
 // -------------  function to change active class of buttons
@@ -68,6 +82,13 @@ function handleClassName() {
       one.classList.remove('active');
     }
   });
+  maxButtons.forEach((one, i) => {
+    if (Number(one.innerText) === counter.max) {
+      one.classList.add('active');
+    } else {
+      one.classList.remove('active');
+    }
+  });
 }
 
 //------------------------------------reducer function which contains all logic-----------------------
@@ -75,18 +96,37 @@ function handleClassName() {
 function reducer(state = 0, action) {
   switch (action.type) {
     case 'increment':
-      return { value: state.value + state.step, step: state.step };
+      if (state.value + state.step <= state.max) {
+        return {
+          value: state.value + state.step,
+          step: state.step,
+          max: state.max,
+        };
+      } else {
+        return { value: state.value, step: state.step, max: state.max };
+      }
     case 'decrement':
-      return { value: state.value - state.step, step: state.step };
+      if (state.value - state.step >= 0) {
+        return {
+          value: state.value - state.step,
+          step: state.step,
+          max: state.max,
+        };
+      } else {
+        return { value: state.value, step: state.step, max: state.max };
+      }
     case 'reset':
       setTimeout(() => {
         changeData();
         handleClassName();
       }, 0);
-      return { value: 0, step: 1 };
+      return { value: 0, step: 1, max: 99999999 };
     case 'stepChange':
-      return { value: counter.value, step: action.newStep };
+      return { value: state.value, step: action.newStep, max: state.max };
+
+    case 'maxChange':
+      return { value: state.value, step: state.step, max: action.newMax };
     default:
-      return { value: state, step: 1 };
+      return { value: state, step: 1, max: 99999999 };
   }
 }

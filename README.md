@@ -33,3 +33,13 @@
 ### - Clicking on Reset will reset the counter value to 0
 
 ---
+
+---
+
+## 3) Branch "step-2" contains following functionality
+
+### - In this extension we will add a new feature to our counter application. With this new feature will have a max value. Once max value is selected the value of counter will not exceed. By default it should be infinity.
+
+### - For Example:
+
+### - If user selected the step to be 5 and max to 15. The value of counter should increment/decrement by 5 and should not exceed the max value.

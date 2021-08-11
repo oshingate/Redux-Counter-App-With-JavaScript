@@ -75,9 +75,9 @@ function handleClassName() {
 function reducer(state = 0, action) {
   switch (action.type) {
     case 'increment':
-      return { value: state.value + (state.step || 1), step: state.step };
+      return { value: state.value + state.step, step: state.step };
     case 'decrement':
-      return { value: state.value - (state.step || 1), step: state.step };
+      return { value: state.value - state.step, step: state.step };
     case 'reset':
       setTimeout(() => {
         changeData();

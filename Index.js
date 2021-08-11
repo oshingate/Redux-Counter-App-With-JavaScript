@@ -46,9 +46,6 @@ let stepbuttons = document.querySelectorAll('.btn-sec');
 
 stepbuttons.forEach((each, i) => {
   each.addEventListener('click', () => {
-    // step = Number(each.innerText);
-    // changeData();
-    // handleClassName();
     store.dispatch({ type: 'stepChange', newStep: Number(each.innerText) });
     changeData();
     handleClassName();
@@ -78,7 +75,6 @@ function handleClassName() {
 function reducer(state = 0, action) {
   switch (action.type) {
     case 'increment':
-      console.log('inc', state);
       return { value: state.value + (state.step || 1), step: state.step };
     case 'decrement':
       return { value: state.value - (state.step || 1), step: state.step };

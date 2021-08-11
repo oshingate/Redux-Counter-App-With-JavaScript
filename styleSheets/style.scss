@@ -25,7 +25,7 @@ a {
   color: white;
 }
 .btn-pri {
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.5rem;
   border-radius: 10px;
   background-color: $green;
   color: white;
@@ -58,5 +58,31 @@ header {
 .button-sec {
   li {
     margin: 0 1rem;
+  }
+}
+
+//step-sec
+.step-sec {
+  .each-div {
+    margin: 0 2rem;
+  }
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $sec;
+    margin: 2rem 0;
+  }
+  button {
+    padding: 1.5rem;
+    background-color: $sec;
+    color: white;
+    outline: none;
+    margin: 0 0.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+  }
+  .active {
+    background-color: $pri;
   }
 }

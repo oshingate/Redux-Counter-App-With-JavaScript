@@ -164,7 +164,7 @@ a {
 }
 
 .btn-pri {
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.5rem;
   border-radius: 10px;
   background-color: #30ba67;
   color: white;
@@ -200,5 +200,31 @@ header strong {
 
 .button-sec li {
   margin: 0 1rem;
+}
+
+.step-sec .each-div {
+  margin: 0 2rem;
+}
+
+.step-sec h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #21345e;
+  margin: 2rem 0;
+}
+
+.step-sec button {
+  padding: 1.5rem;
+  background-color: #21345e;
+  color: white;
+  outline: none;
+  margin: 0 0.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.step-sec .active {
+  background-color: #5271ff;
 }
 /*# sourceMappingURL=style.css.map */

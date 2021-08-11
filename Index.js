@@ -8,7 +8,12 @@ let counter = store.getState();
 
 let h1 = document.querySelector('#counter');
 
-h1.innerText = counter;
+h1.innerText = counter.value;
+
+//----------------------------- display step ---------------------------------
+
+let steph2 = document.querySelector('.step-display');
+changeData();
 
 //-----------------------------------selecting buttons and adding eventListener---------------
 
@@ -32,20 +37,60 @@ reset.addEventListener('click', () => {
 
 store.subscribe(() => {
   counter = store.getState();
-  h1.innerText = counter;
+  h1.innerText = counter.value;
 });
+
+//----------------------------------  changing step ----------------------------
+
+let stepbuttons = document.querySelectorAll('.btn-sec');
+
+stepbuttons.forEach((each, i) => {
+  each.addEventListener('click', () => {
+    // step = Number(each.innerText);
+    // changeData();
+    // handleClassName();
+    store.dispatch({ type: 'stepChange', newStep: Number(each.innerText) });
+    changeData();
+    handleClassName();
+  });
+});
+
+//----------------function to change step and max diplay
+
+function changeData() {
+  return (steph2.innerText = `Step :- ${counter.step}`);
+}
+
+// -------------  function to change active class of buttons
+
+function handleClassName() {
+  stepbuttons.forEach((one, i) => {
+    if (Number(one.innerText) === counter.step) {
+      one.classList.add('active');
+    } else {
+      one.classList.remove('active');
+    }
+  });
+}
 
 //------------------------------------reducer function which contains all logic-----------------------
 
 function reducer(state = 0, action) {
   switch (action.type) {
     case 'increment':
-      return state + 1;
+      console.log('inc', state);
+      return { value: state.value + (state.step || 1), step: state.step };
     case 'decrement':
-      return state - 1;
+      return { value: state.value - (state.step || 1), step: state.step };
     case 'reset':
-      return 0;
+      setTimeout(() => {
+        changeData();
+        handleClassName();
+      }, 0);
+      return { value: 0, step: 1 };
+    case 'stepChange':
+      return { value: counter.value, step: action.newStep };
     default:
-      return state;
+      return { value: state, step: 1 };
   }
 }
